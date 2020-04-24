@@ -4,14 +4,15 @@
 #include <time.h>
 #include <string.h>
 #include <errno.h>
+#include <float.h>
 
 
 //compilare con:
 // gcc Esercizio1.c ../../Resources/C/InsertionSort/insertion_sort.c ../../Resources/C/QuickSort/quick_sort.c ../../Resources/C/Array/array.c -o Esercizio1
 
-#define MAX_BUF_LEN 1024
+#define MAX_BUF_LEN 512
 #define ERROR_EXIT_CODE 1
-
+#define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
 
 /*
 
@@ -53,20 +54,23 @@ int compare_field2(void* a, void* b) {
 int compare_field3(void* a, void* b) {
     Record * aa = (Record*)a;
     Record* bb = (Record*)b;
-    return aa->field3 - bb->field3;
+    return aa->field3 - bb->field3;  //PROBLEMA NUMERI DOPO LA VIRGOLA!
+
+    if(aa->field3 - bb->field3 < 0){
+        return -1;
+    }else{
+        return 1;
+    }
+    //return (aa->field3-bb->field3) / FLT_EPSILON;
+    //return (fabs(aa->field3 - bb->field3) / MIN(aa->field3, bb->field3) )/FLT_EPSILON ;
 }
 
-void print_usage() { //insertion 1 coseacaso.csv
-    printf("Insert: \n");
-    printf("< -1 | 1 > <filename>\n");
-    printf("    -1: sort descending order\n");
-    printf("     1: sort ascending order\n");
-}
+
+
 
 
 void load_data(Array* array, char const* filename ) {
     FILE* file = fopen(filename, "r");
-
     if(!file){
         fprintf(stderr, "No such file or directory\n");
         errno = ENOENT;
@@ -82,9 +86,7 @@ void load_data(Array* array, char const* filename ) {
 
     while(!feof(file)) {
         Record* record = (Record*) malloc(sizeof(Record));
-        int n = fscanf(file, "%d,%1024[^,],%d,%f\n", &id, field1, &field2, &field3);
-
-
+        int n = fscanf(file, "%d,%512[^,],%d,%f\n", &id, field1, &field2, &field3);
 
 
         if(n != 4) {
@@ -96,18 +98,15 @@ void load_data(Array* array, char const* filename ) {
             exit(ERROR_EXIT_CODE);
         }
 
+
         record->id = id;
         record->field1 = strdup(field1);
         record->field2 = field2;
         record->field3 = field3;
-
         array_insert(array, record, i);
         i++;
     }
 }
-
-
-
 
 void print_array(Array* array) {
     for(int i=0; i<array_size(array); i++) {
@@ -159,15 +158,10 @@ int main(int argc, char const *argv[]) {
 
     printf("Which algorithm do you prefer to use? (insertion / quick)\n");
     scanf("%s", algorithm);
-
-    //printf("How do you prefer to order? (increasing = 1 / decreasing = -1)\n");
-
-    //scanf("%d", &order);
-
     printf("Which file do you want to order?\n");
     printf("do you want order:\n 1. records.csv\n 2. other file\n");
     scanf("%d", &choice);
-    printf("%d\n",choice );
+
     if(choice == 1){
         strcpy(filename, "../../../test/test1/records.csv");
     }else{
@@ -177,9 +171,6 @@ int main(int argc, char const *argv[]) {
     printf("how many record?\n");
     scanf("%d", &numRecord);
 
-
-
-
     printf("---------Partito-----------\n");
     start = clock();
 
@@ -187,21 +178,16 @@ int main(int argc, char const *argv[]) {
     load_data(array, filename);
 
     if(strcmp(algorithm, "insertion")==0){
-
-        insertionSort(array, compare_field1, order);
+        //insertionSort(array, compare_field1, order);
         //insertionSort(array, compare_field2, order);
-        //insertionSort(array, compare_field3, order);
-
-
+        insertionSort(array, compare_field3, order);
     }else if(strcmp(algorithm, "quick")==0){
         //quickSort(array, compare_field1, 0, array->size-1);
-        quickSort(array, compare_field2, 0, array->size-1);
-        //quickSort(array, compare_field3, 0, array->size-1);
-
-
+        //quickSort(array, compare_field2, 0, array->size-1);
+        quickSort(array, compare_field3, 0, array->size-1);
     }else{
         printf("Parameters error\n");
-        print_usage();
+        free_data(array);
         exit(ERROR_EXIT_CODE);
     }
 
@@ -212,9 +198,5 @@ int main(int argc, char const *argv[]) {
 
     printf("time used by cpu is: %f\n",  cpu_time_used);
     free_data(array);
-    printf("finito\n");
-    //print_usage();
-
-
-
+    printf("---------finito-----------\n");
 }

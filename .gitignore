@@ -9,4 +9,5 @@ test/
 *.csv
 *.gch
 *.class
+*.out
 ordinato

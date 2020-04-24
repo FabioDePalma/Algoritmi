@@ -5,7 +5,7 @@
 Array* array_new(int size){
     Array* result = (Array*)malloc(sizeof(Array));
     result->array = (void**)malloc(sizeof(void*) * size);
-    result->size = size+1;
+    result->size = size;
     return result;
 }
 
