@@ -146,13 +146,13 @@ void write_file(Array* array, char const* filename){
 
 
 int main(int argc, char const *argv[]) {
-
+    Array* array;
     char algorithm[10];
     int order = 1;
     char filename[50]; //= {"daprovare.csv"};
     char fileDaScrivere[10] = {"ordinato"};
-    clock_t start, end;
-    double cpu_time_used;
+    clock_t start, end, startalgo, endalgo;
+    double cpu_time_used, algo_time;
     int choice;
     int numRecord;
 
@@ -167,36 +167,49 @@ int main(int argc, char const *argv[]) {
     }else{
         scanf("%s", filename);
     }
-
     printf("how many record?\n");
     scanf("%d", &numRecord);
 
-    printf("---------Partito-----------\n");
+
+
+
+    printf("---------START-----------\n");
     start = clock();
 
-    Array* array = array_new(numRecord);
-    load_data(array, filename);
 
     if(strcmp(algorithm, "insertion")==0){
-        //insertionSort(array, compare_field1, order);
-        //insertionSort(array, compare_field2, order);
+        array = array_new(numRecord);
+        load_data(array, filename);
+        startalgo = clock();
+        insertionSort(array, compare_field1, order);
+        insertionSort(array, compare_field2, order);
         insertionSort(array, compare_field3, order);
+        endalgo = clock();
     }else if(strcmp(algorithm, "quick")==0){
-        //quickSort(array, compare_field1, 0, array->size-1);
-        //quickSort(array, compare_field2, 0, array->size-1);
+        array = array_new(numRecord);
+        load_data(array, filename);
+        startalgo = clock();
+        quickSort(array, compare_field1, 0, array->size-1);
+        quickSort(array, compare_field2, 0, array->size-1);
         quickSort(array, compare_field3, 0, array->size-1);
+        endalgo = clock();
     }else{
         printf("Parameters error\n");
-        free_data(array);
         exit(ERROR_EXIT_CODE);
     }
 
-    end = clock();
-    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    algo_time = ((double) (endalgo - startalgo)) / CLOCKS_PER_SEC;
+    printf("---------END ALGO-----------\n");
+    printf("time used by cpu for algorithm: %f\n",  algo_time);
+
+    printf("---------writing file-----------\n");
     write_file(array, fileDaScrivere);
 
-
-    printf("time used by cpu is: %f\n",  cpu_time_used);
     free_data(array);
-    printf("---------finito-----------\n");
+
+    end = clock();
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    printf("Total time used by cpu is: %f\n",  cpu_time_used);
+
+    printf("---------END-----------\n");
 }
