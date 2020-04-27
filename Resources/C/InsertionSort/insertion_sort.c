@@ -3,7 +3,8 @@
 void insertionSort(Array* array, int (*compare)(void* a, void* b), int check){
     int i,j;
     int length = array_size(array);
-    if(check == -1){ //DECRESCENTE
+    /*Descending*/
+    if(check == -1){
         for(i = 1; i<length; i++){
             j = i;
             while(j > 0 && compare(array_get(array, j-1), array_get(array, j)) < 0 ){
@@ -11,7 +12,8 @@ void insertionSort(Array* array, int (*compare)(void* a, void* b), int check){
                 j = j-1;
             }
         }
-    }else if(check == 1){  //CRESCENTE
+    /*Ascending*/
+    }else if(check == 1){
         for(i = 1; i<length; i++){
             j = i;
             while(j > 0 && compare(array_get(array, j-1), array_get(array, j)) > 0 ){
@@ -20,10 +22,7 @@ void insertionSort(Array* array, int (*compare)(void* a, void* b), int check){
             }
         }
     }else{
-        //ERRORE
         printf("Parameters error\n");
         exit(0);
     }
 }
-
-//compilare con gcc insertion_sort_test.c insertion_sort.c ../Array/array.c ../Unity/unity.c -o Test

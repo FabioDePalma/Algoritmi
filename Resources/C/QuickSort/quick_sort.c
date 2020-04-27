@@ -3,13 +3,11 @@
 
 
 int partition(Array* array,int (*compare)(void* a, void* b), int i , int j){
-    //int i, j;
-    //i = 1;
-    //j = array->size-1;
+
     int pivot = i;
     i++;
     while(i <= j){
-        if(compare(array_get(array, i), array_get(array, pivot)) <= 0){//a[i]<=a[0]
+        if(compare(array_get(array, i), array_get(array, pivot)) <= 0){
             i++;
         }else if(compare(array_get(array, j), array_get(array, pivot)) > 0){
             j--;

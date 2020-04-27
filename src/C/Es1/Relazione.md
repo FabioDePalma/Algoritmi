@@ -67,4 +67,4 @@ di $Θ(n\  \log n)$.
 
 ## Conclusione
 L'algoritmo di ordinamento più veloce è stato il Quicksort, mentre
-l'Insertion Sort supera i 10 minuti già a partire da 1 milione di record.
+l'InsertionSort supera i 10 minuti già a partire da 1 milione di record.
