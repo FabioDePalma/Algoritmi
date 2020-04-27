@@ -22,10 +22,14 @@ Ogni algoritmo è implementato in modo tale da poter essere utilizzato su un tip
 I tempi di risposta di questi algoritmi sono stati ricavati tramite la funzione clock() una
 funzione che ritorna il CPU time. Ogni valore raccolto è il risultato di due
 misurazioni effettuate su due macchine aventi le seguenti caratteristiche:
-
-	1. Intel Core i7-4510U @2.00GHz
-	2. AMD Ryzen 5-3500U @2.10GHz
-	3. RAM 8GB
+### Macchina 1:
+    1. Intel Core i7-4510U @2.00GHz
+    2. 8GB RAM
+    3. Kubuntu 20.04 (Linux)
+### Macchina 2:
+	1. AMD Ryzen 5-3500U @2.10GHz
+	2. RAM 8GB
+    3. Windows 10 Home
 
 * * *
 Terminato l'ordinamento dei tre campi il risultato verrà scritto su un nuovo file "ordinato".
