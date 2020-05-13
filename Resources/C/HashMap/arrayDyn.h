@@ -4,11 +4,11 @@ typedef struct _Array{
     int* array;
     int size;
     int capacity;
-}Array;
+}ArrayDyn;
 
-Array* newArray();
-void resize(Array* a, size_t memsize);
-void insertarr(Array* a, int elem, int index);
-int array_size(Array* a);
-int array_get(Array* a, int i);
-void freeData(Array* array);
+ArrayDyn* newarrayDyn();
+void resize(ArrayDyn* a, size_t memsize);
+void insertarr(ArrayDyn* a, int elem, int index);
+int arrayDyn_size(ArrayDyn* a);
+int arrayDyn_get(ArrayDyn* a, int i);
+void freeData(ArrayDyn* array);

@@ -8,7 +8,7 @@ typedef struct _myArray{
     int size;
 }Array;
 
-typedef int (*compare)(void*, void*);
+
 
 /**
  * Create a new Static Array

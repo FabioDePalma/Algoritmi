@@ -1,32 +1,32 @@
 #include "arrayDyn.h"
 
 
-Array* newArray(){
-    Array* array = (Array*)malloc(sizeof(Array));
-    array->capacity = 2;
-    array->array = (int*)malloc(sizeof(int) * array->capacity);
-    array->size = 0;
-    return array;
+ArrayDyn* newarrayDyn(){
+    ArrayDyn* arrayDyn = (ArrayDyn*)malloc(sizeof(arrayDyn));
+    arrayDyn->capacity = 2;
+    arrayDyn->array = (int*)malloc(sizeof(int) * arrayDyn->capacity);
+    arrayDyn->size = 0;
+    return arrayDyn;
 }
 
-void resize(Array* a, size_t memsize){
+void resize(ArrayDyn* a, size_t memsize){
     a->capacity = memsize;
     a->array = (int*)realloc(a->array, sizeof(int) * a->capacity);
 }
-int array_size(Array* a){
+int arrayDyn_size(ArrayDyn* a){
     return a->size;
 }
-int array_get(Array* a, int i){
+int arrayDyn_get(ArrayDyn* a, int i){
     return a->array[i];
 }
 
-void freeData(Array* array){
-    free(array->array);
-    free(array);
+void freeData(ArrayDyn* ArrayDyn){
+    free(ArrayDyn->array);
+    free(ArrayDyn);
 }
 
-void insertarr(Array* a, int elem, int index){
-    if(a->capacity == a->size){
+void insertarr(ArrayDyn* a, int elem, int index){
+    if(a->size == a->capacity){
         resize(a, a->capacity*2);
     }
     a->array[index] = elem;
