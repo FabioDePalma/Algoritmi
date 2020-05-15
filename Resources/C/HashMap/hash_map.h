@@ -21,7 +21,7 @@ typedef struct _Node{
 
 /**
  * Create a new HashTable
- * Parameter: capacity of table
+ * Parameter: capacity of the table
  */
 HashMap* new_HashMap(int capacity);
 
@@ -54,7 +54,7 @@ int isKey(HashMap* map, void* key, int (*compare)(void* a, void* b), int hashFun
 
 /** Returns the value associated with the key
  * Paramenter: hashmap, key, *compare Funcion,Hash Function
- * Note: must cast of own type because the functio return void*
+ * Note: must cast of own type because the function return void*
  */
 void* get_value(HashMap* map, void* key, int (*compare)(void* a, void* b), int hashFunction);
 
@@ -66,7 +66,7 @@ void insert(HashMap* map, void* key, void* value, int (*compare)(void* a, void* 
 /*remove a key associated */
 void removeKey(HashMap* map, void* key,int (*compare)(void*a, void*b) ,int hashFunction);
 
-/** Return: new ArrayDyn of keyy
+/** Return: new ArrayDyn of key
  *
  */
 ArrayDyn* allKeys(HashMap* map);
