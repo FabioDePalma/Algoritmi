@@ -17,7 +17,7 @@ Da implementazione dell'EditDistance potrebbe capitare che alcune parole errate 
 Al termine del confronto di ogni vocabolo del dizionario associato ad una parola della citazione salviamo i vocaboli con edit distance minimo all'interno di un ArrayList. Così facedo si ha un ArrayList di ArrayList dove gli indici della prima struttura corrispondono alle parole della citazione e associato ad ogni suo indice è presente il secondo Arraylist contenente i vocaboli del dizionario con EditDistance minimo.
 
 
-![ArrayList.jpg](:/cdaff578516f434488e4b8786fdbedab)
+![](ArrayList1.png)
 
 
 
