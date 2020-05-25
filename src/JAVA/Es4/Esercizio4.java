@@ -17,11 +17,27 @@ import java.util.*;
 class Esercizio4{
 
     public static void main(String[] args) {
+        //File file = new File("../../../test/test4/test1/input.txt");
         //File file = new File("../../../test/test4/test2/input.txt");
+        //File file = new File("../../../test/test4/test3/input.txt");
+        //File file = new File("../../../test/test4/test4/input.txt");
+        //File file = new File("../../../test/test4/test5/input.txt");
+        //File file = new File("../../../test/test4/test6/input.txt");
+        //File file = new File("../../../test/test4/test7/input.txt");
+        //File file = new File("../../../test/test4/test8/input.txt");
+        //File file = new File("../../../test/test4/test9/input.txt");
+        //File file = new File("../../../test/test4/test10/input.txt");
+        File file = new File("../../../test/test4/test11/input.txt");
+        //File file = new File("input3.txt");
+
         //File file = new File("input.txt");
-        File file = new File("test");
+        //File file = new File("test");
+        //File file = new File("test2");
+
         Map<Integer, ArrayList<Pair>> mappa = new HashMap<>();
+        Map<Integer,NodeParent> path = new HashMap<>();
         Graph grafo = new Graph(mappa);
+
         try{
             long startCreate = System.nanoTime();
             Scanner sc = new Scanner(file);
@@ -42,6 +58,13 @@ class Esercizio4{
                 i++;
             }
             long endCreate = System.nanoTime();
+            //grafo.printMap();
+
+            grafo.BFS(1,numbOfSource,numbOfSource,path);
+
+            //grafo.DFS(1,numbOfSource,numbOfSource,path);
+
+
             System.out.println((double)(endCreate-startCreate) / 1000000000 + " sec");
             File apro = new File("answer");
             try{
@@ -52,17 +75,14 @@ class Esercizio4{
                 System.out.println(numbOfQuery);
                 while(sc.hasNext()){
                     String s = sc.nextLine();
-                    int a[] = new int[3];
                     String[] parts = s.split("\\s+");
                     int source = Integer.parseInt(parts[0]);
                     int adj = Integer.parseInt(parts[1]);
                     int weight = Integer.parseInt(parts[2]);
+                    grafo.findPath(source,adj,weight,path);
+                    //scrivo.write(grafo.findPath(source,adj,weight,path));
 
-                    //ArrayList<Integer> path = grafo.findPath(source,adj);
-                    //System.out.println(grafo.query(path, weight));
-                    //grafo.query(path,weight);
-                    //grafo.findPath(source, adj, weight);
-                    scrivo.write(grafo.findPath(source, adj, weight) + "\n");
+
 
 
                 }
@@ -72,18 +92,9 @@ class Esercizio4{
                 scrivo.close();
                 System.out.println();
 
-                /*
-                for(int z = 0; z<path.size();z++){
-                    System.out.println(path.get(z));
-                }
-                */
             }catch(IOException e){
                 e.printStackTrace();
             }
-
-
-
-
 
         }catch(FileNotFoundException e){
             e.printStackTrace();
