@@ -17,7 +17,8 @@ import java.util.*;
 class Esercizio4{
 
     public static void main(String[] args) {
-        File file1 = new File("../../../test/test4/test1/input.txt");
+        File file = new File("../../../test/test4/test1/input.txt");
+        /*
         File file2 = new File("../../../test/test4/test2/input.txt");
         File file3 = new File("../../../test/test4/test3/input.txt");
         File file4 = new File("../../../test/test4/test4/input.txt");
@@ -28,11 +29,14 @@ class Esercizio4{
         File file9 = new File("../../../test/test4/test9/input.txt");
         File file10 = new File("../../../test/test4/test10/input.txt");
         File file11 = new File("../../../test/test4/test11/input.txt");
+        */
         //File file = new File("input3.txt");
 
         //File file = new File("input.txt");
         //File file = new File("test");
         //File file = new File("test2");
+        //args[1] = "../../../test/test4/";
+
 
         Map<Integer, ArrayList<Pair>> mappa = new HashMap<>();
         Map<Integer,NodeParent> path = new HashMap<>();
@@ -40,6 +44,7 @@ class Esercizio4{
 
         try{
             long startCreate = System.nanoTime();
+
             Scanner sc = new Scanner(file);
 
             int numbOfSource = sc.nextInt();
@@ -48,7 +53,7 @@ class Esercizio4{
             int i = 0;
             while(i < numbOfSource-1){
                 String s = sc.nextLine();
-                int a[] = new int[3];
+                //int a[] = new int[3];
                 String[] parts = s.split("\\s+");
                 int source = Integer.parseInt(parts[0]);
                 int adj = Integer.parseInt(parts[1]);

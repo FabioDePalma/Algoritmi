@@ -4,7 +4,7 @@ import java.util.*;
 class Es4{
 
     public static void main(String[] args) {
-        File file = new File("../../../test/test4/test1/input.txt");
+        //File file = new File("../../../test/test4/test1/input.txt");
         /*
         File file2 = new File("../../../test/test4/test2/input.txt");
         File file3 = new File("../../../test/test4/test3/input.txt");
@@ -17,12 +17,14 @@ class Es4{
         File file10 = new File("../../../test/test4/test10/input.txt");
         File file11 = new File("../../../test/test4/test11/input.txt");
         */
+
+
         Map<Integer, ArrayList<Pair>> mappa = new HashMap<>();
         Map<Integer,NodeParent> path = new HashMap<>();
         Graph grafo = new Graph(mappa);
 
-        try{
-            Scanner sc = new Scanner(file);
+        //try{
+            Scanner sc = new Scanner(System.in);
 
             int numbOfSource = sc.nextInt();
             sc.nextLine();
@@ -41,6 +43,7 @@ class Es4{
             long endCreate = System.nanoTime();
             //grafo.printMap();
 
+            //provare a risalire anche dal destination///////////////////////////////////////////////////////////////////////////////
             grafo.BFS(1,numbOfSource,numbOfSource,path);
 
             //grafo.DFS(1,numbOfSource,numbOfSource,path);
@@ -65,9 +68,9 @@ class Es4{
 
 
 
-        }catch(FileNotFoundException e){
-            e.printStackTrace();
-        }
+        //}catch(FileNotFoundException e){
+        //    e.printStackTrace();
+        //}
         //grafo.printMap();
 
     }
