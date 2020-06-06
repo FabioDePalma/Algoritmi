@@ -64,7 +64,7 @@ static void test_empty(){
     HashMap* hashmap = create_new_objects_empty();
     TEST_ASSERT_EQUAL(true, isEmpty(hashmap));
     destroy_hashmap(hashmap);
-    //free(hashmap);
+
 }
 
 static void test_numberOfElem(){

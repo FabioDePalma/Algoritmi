@@ -95,72 +95,6 @@ void load_hashmap(HashMap* hashMap, char const* filename){
     fclose(file);
 }
 
-/*
-void printhashmap(HashMap* hashmap){
-    printf("index\t\tkey\tvalue\n");
-    for(int i = 0; i<hashmap->capacity; i++){
-        if(hashmap->array[i] != NULL){
-            printf("%d---->\t  ", i);
-            Node* head = (Node*)hashmap->array[i];
-
-            while(head != NULL){
-                printf(" <%d,%d>  ----> ", head->key,head->elem);
-                head = head->next;
-            }
-            printf("NULL\n" );
-            //free(head);
-        }
-    }
-}
-
-void write_file(HashMap* map, char const* filename){
-    FILE * fptr = fopen(filename, "w");
-    if (fptr == NULL) {
-        printf("Error!");
-        exit(1);
-    }
-    for(int i = 0; i<map->capacity; i++){
-        if(map->array[i] != NULL){
-            fprintf(fptr, "%d---->\t  ", i);
-            Node* head = (Node*)map->array[i];
-
-            while(head != NULL){
-                fprintf(fptr," <%d,%d>  ----> ", head->key,head->elem);
-                head = head->next;
-            }
-            fprintf(fptr, "NULL\n" );
-        }
-    }
-
-    fclose(fptr);
-}
-
-void writearrayinfile(Array* arr, char const* filename){
-    FILE * fptr = fopen(filename, "w");
-    if (fptr == NULL) {
-        printf("Error!");
-        exit(1);
-    }
-    for(int i = 0; i<arr->size; i++){
-        Pair* pair = (Pair*)arr->array[i];
-        fprintf(fptr,"%d,%d\n",pair->key, pair->value );
-    }
-    fclose(fptr);
-}
-
-
-void writeArrayRandomFile(Array* arr, char const* filename){
-    FILE * fptr = fopen(filename, "w");
-    if (fptr == NULL) {
-        printf("Error!");
-        exit(1);
-    }
-    for(int i = 0; i<arr->size; i++){
-        fprintf(fptr,"%d   ",array_get(arr, i) );
-    }
-    fclose(fptr);
-}
-*/
 int timeGetValueRandom(HashMap* map, Array* randomKey){
     void* valuee;
     long keyy;
@@ -217,24 +151,18 @@ int main() {
     double cpu_time_hash;
     HashMap* map = new_HashMap(CAPACITYHM);
     char filecsv[40] = {"../../../test/test3/hashes.csv"};
-    //char dascriverehashmap[10] = {"hashmap"};
-    //char filedaprovare[20] = {"daprovare.csv"};
 
     hashstart = clock();
     load_hashmap(map,filecsv);
-    //printhashmap(map);
     hashend = clock();
     cpu_time_hash = ((double) (hashend - hashstart)) / CLOCKS_PER_SEC;
-    //write_file(map,dascriverehashmap);
-
-    //destroy_hashmap(map);
 
     printf("\n\n\ntime loading hashmap  : %f\n", cpu_time_hash );
 
-    /*------------Array: caricamento su array statico & quickSort-------------*/
+    /*------------Array: load static array & quickSort-------------*/
     clock_t arrayStart, arrayEnd;
     double cpu_time_array;
-    //char dascriverearray[6] = {"array"};
+
     Array* arraySorted = array_new(CAPACITYARR);
 
     arrayStart = clock();
@@ -247,7 +175,6 @@ int main() {
     cpu_time_array = ((double) (arrayEnd - arrayStart)) / CLOCKS_PER_SEC;
     printf("\n\n\ntime loading & sorting array  : %f\n", cpu_time_array );
 
-    //writearrayinfile(arraySorted, dascriverearray);
 
     /*------------random number-------------*/
 
@@ -265,7 +192,7 @@ int main() {
     endHashMap = clock();
     printf("\n\n\ntime get value random hashMap: %f\n", ((double) (endHashMap-startHashMap)) / CLOCKS_PER_SEC );
 
-    /*recovery key-value pair using binary research*/
+    /*---------------recovery key-value pair using binary research-------------------*/
     clock_t startArray, endArray;
 
     startArray = clock();
@@ -284,6 +211,3 @@ int main() {
 
     return 0;
 }
-
-//Liberare memoria!!!!!!!!!!!!!
-//AMORE NON MI FUNZIONA IL COMANDO MAKE

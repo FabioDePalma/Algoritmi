@@ -8,7 +8,6 @@ HashMap* new_HashMap(int capacity){
     alloca->array = (void**)calloc(capacity, sizeof(void*));
     alloca->capacity = capacity;
     alloca->size = 0;
-
     return alloca;
 }
 void deleteAllNode(HashMap* hashmap){
@@ -24,7 +23,6 @@ void deleteAllNode(HashMap* hashmap){
                 prev = head;
                 hashmap->size--;
             }
-            //free(head);
         }
     }
 }
@@ -34,7 +32,6 @@ void destroy_hashmap(HashMap* hashmap){
     if(hashmap != NULL){
       free(hashmap);
     }
-    //hashmap = NULL;
 }
 
 int isEmpty(HashMap* hashmap){
@@ -65,7 +62,6 @@ int isKey(HashMap* map, void* key, int (*compare)(void* a, void* b), int hashFun
 
 void* get_value(HashMap* map, void* key, int (*compare)(void* a, void* b), int hashFunction){
     if(map->array[hashFunction] == NULL){
-        //perror("there is no value for this key");
         return NULL;
     }else{
         Node* it = (Node*)map->array[hashFunction];
@@ -76,7 +72,6 @@ void* get_value(HashMap* map, void* key, int (*compare)(void* a, void* b), int h
                 it = it->next;
             }
         }
-        //perror("the lookup value is not found ");
         return NULL;
     }
 }
@@ -113,7 +108,7 @@ void removeKey(HashMap* map, void* key,int (*compare)(void*a, void*b) ,int hashF
     }else{
         Node* head = (Node*)map->array[hashFunction];
         Node* prev = head;
-        if(compare(head->key, key) == 0){ // cancellazione in testa
+        if(compare(head->key, key) == 0){ // del head
             if(prev->next == NULL){
                 map->array[hashFunction] = NULL;
                 free(prev);
@@ -123,7 +118,7 @@ void removeKey(HashMap* map, void* key,int (*compare)(void*a, void*b) ,int hashF
                 free(prev);
                 map->size--;
             }
-        }else{ //cancellazione in mid e in coda
+        }else{ //del in mid end tail
             head = head->next;
             while(head != NULL){
                 if(compare(head->key, key) == 0){
@@ -152,7 +147,5 @@ ArrayDyn* allKeys(HashMap* map){
             }
         }
     }
-    //for(int i = 0; i<arrayDyn->size;i++)
-        //printf("%d\n",arrayDyn->array[i] );
     return arrayDyn;
 }
